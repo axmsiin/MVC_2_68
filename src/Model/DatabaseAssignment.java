@@ -13,21 +13,20 @@ public class DatabaseAssignment {
         loadCSV();
     }
 
-    // ===== โหลด CSV =====
     private void loadCSV() {
         assignments.clear();
 
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
 
-            String line = br.readLine(); // skip header
+            String line = br.readLine(); 
 
             while ((line = br.readLine()) != null) {
                 String[] r = line.split(",");
 
                 assignments.add(new Assignment(
-                        r[0],                      // citizenId
-                        r[1],                      // shelterId
-                        LocalDate.parse(r[2])      // assignDate
+                        r[0],                      
+                        r[1],                      
+                        LocalDate.parse(r[2])      
                 ));
             }
 
@@ -36,7 +35,6 @@ public class DatabaseAssignment {
         }
     }
 
-    // ===== เขียน CSV =====
     private void saveCSV() {
         try (PrintWriter pw = new PrintWriter(new FileWriter(FILE_PATH))) {
 
@@ -55,7 +53,6 @@ public class DatabaseAssignment {
         }
     }
 
-    // ===== public methods =====
     public List<Assignment> getAll() {
         return assignments;
     }
@@ -67,10 +64,9 @@ public class DatabaseAssignment {
 
     public void add(Assignment a) {
         assignments.add(a);
-        saveCSV();   // 🔥 สำคัญมาก
+        saveCSV();   
     }
 
-    // ใช้เมื่อต้อง sync ใหม่
     public void reload() {
         loadCSV();
     }

@@ -19,11 +19,9 @@ public class AssignmentController {
         this.shelterDB = shelterDB;
         this.assignDB = assignDB;
 
-        // ✅ โหลด assignment เดิม → ใส่คนเข้า shelter ก่อน
         syncExistingAssignments();
     }
 
-    // 🔥 เอาข้อมูล assignment เดิมมาเติม current ของ shelter
     private void syncExistingAssignments() {
 
         for (Assignment a : assignDB.getAll()) {
@@ -44,13 +42,11 @@ public class AssignmentController {
         }
     }
 
-    // 🔥 จัดสรรจากข้อมูลเดิมที่มีอยู่
     public void assign() {
 
         List<Citizen> citizens = citizenDB.getAll();
         List<Shelter> shelters = shelterDB.getAll();
 
-        // เด็ก + ผู้สูงอายุได้ก่อน
         citizens.sort((a, b) -> {
             boolean aP = a.getAge() < 12 || a.getAge() >= 60;
             boolean bP = b.getAge() < 12 || b.getAge() >= 60;
@@ -59,7 +55,6 @@ public class AssignmentController {
 
         for (Citizen c : citizens) {
 
-            // ❌ ถ้ามี assignment แล้ว ข้าม
             if (assignDB.isAssigned(c.getCitizenId()))
                 continue;
 
@@ -68,14 +63,11 @@ public class AssignmentController {
                 if (s.isFull())
                     continue;
 
-                // 🔥 ตรวจ risk ให้ตรง
                 if (!riskMatch(c, s))
                     continue;
 
-                // เพิ่มคนเข้า shelter (runtime)
                 s.addCitizen(c);
 
-                // 🔥 บันทึกผลลง assignment.csv
                 assignDB.add(new Assignment(
                         c.getCitizenId(),
                         s.getShelterId(),
@@ -85,7 +77,6 @@ public class AssignmentController {
         }
     }
 
-    // mapping ความเสี่ยง
     private boolean riskMatch(Citizen c, Shelter s) {
 
         switch (c.getCitizenType()) {
@@ -104,7 +95,6 @@ public class AssignmentController {
         return shelterDB.getAll();
     }
 
-    // 🔥 รายงานผลการจัดสรร
     public List<String[]> getReport() {
 
         List<String[]> result = new ArrayList<>();

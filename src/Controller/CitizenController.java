@@ -7,12 +7,10 @@ public class CitizenController {
 
     private DatabaseCitizen db = new DatabaseCitizen();
 
-    // แสดงทั้งหมด
     public List<Citizen> getAll() {
         return db.getAll();
     }
 
-    // แยกตามประเภทประชาชน
     public List<Citizen> getByType(String type) {
 
         if (type.equals("ALL"))

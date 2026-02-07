@@ -30,19 +30,16 @@ public class CitizenRegisterView extends JFrame {
         JButton btnNext = new JButton("Go to Shelter Assignment");
         btnNext.addActionListener(e -> {
 
-            // ✅ สร้าง Database (แหล่งข้อมูลกลาง)
             DatabaseCitizen citizenDB = new DatabaseCitizen();
             DatabaseShelter shelterDB = new DatabaseShelter();
             DatabaseAssignment assignDB = new DatabaseAssignment();
 
-            // ✅ สร้าง Controller โดยส่ง DB เข้าไป
             ShelterController shelterController =
                     new ShelterController(shelterDB);
 
             AssignmentController assignmentController =
                     new AssignmentController(citizenDB, shelterDB, assignDB);
 
-            // ✅ เปิดหน้าถัดไป
             new ShelterAssignView(shelterController, assignmentController);
             dispose();
         });

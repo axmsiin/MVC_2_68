@@ -37,19 +37,18 @@ public class Shelter {
         return citizens.size() >= capacity;
     }
 
-    // 🔥 สำคัญ: ต้องไม่ใส่ซ้ำ
     public boolean addCitizen(Citizen citizen) {
 
         if (citizens.contains(citizen)) {
-            return false; // มีอยู่แล้ว
+            return false; 
         }
 
         if (isFull()) {
-            return false; // เต็ม
+            return false; 
         }
 
         citizens.add(citizen);
-        return true; // เพิ่มสำเร็จ
+        return true; 
     }
 
     public List<Citizen> getCitizens() {

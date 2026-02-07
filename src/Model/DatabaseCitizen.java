@@ -15,13 +15,12 @@ public class DatabaseCitizen {
     private void loadCSV(String path) {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
-            br.readLine(); // skip header
+            br.readLine(); 
             String line;
 
             while ((line = br.readLine()) != null) {
                 String[] r = line.split(",");
 
-                // คนหนึ่งลงทะเบียนได้ครั้งเดียว
                 boolean exists = citizens.stream()
                         .anyMatch(c -> c.getCitizenId().equals(r[0]));
                 if (exists) continue;

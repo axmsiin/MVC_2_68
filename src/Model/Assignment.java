@@ -8,14 +8,12 @@ public class Assignment {
     private String shelterId;
     private LocalDate assignDate;
 
-    // ใช้ตอน assign ใหม่ในระบบ
     public Assignment(String citizenId, String shelterId, LocalDate assignDate) {
         this.citizenId = citizenId;
         this.shelterId = shelterId;
         this.assignDate = assignDate;
     }
 
-    // 🔥 ใช้ตอนอ่านจาก CSV
     public Assignment(String citizenId, String shelterId, String assignDate) {
         this.citizenId = citizenId;
         this.shelterId = shelterId;

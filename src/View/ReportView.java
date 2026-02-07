@@ -11,7 +11,6 @@ public class ReportView extends JFrame {
     private AssignmentController controller;
     private JTable table;
 
-    // ✅ constructor ที่รับ controller
     public ReportView(AssignmentController controller) {
 
         this.controller = controller;
